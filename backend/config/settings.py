@@ -23,9 +23,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-hq1j77)y)bll2m)!2um5690l5@wni4cbwem38)_exxebsb#w@g'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    "shift-make-tool-api.herokuapp.com",
+    "localhost"
+]
 
 
 # Application definition
@@ -37,6 +40,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'rest_framework',
+    'corsheaders',
 ]
 
 MIDDLEWARE = [
@@ -47,7 +52,29 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
 ]
+
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.AllowAny'
+    ]
+}
+
+CORS_ALLOWED_ORIGINS = [
+    'http://127.0.0.1:8002',
+    'http://localhost:3002',
+    # todo: ドメインが決まったらここに追記する
+    # 'https://tdr-plan.com',
+    # 'http://tdr-plan.com',
+    # 'https://www.tdr-plan.com',
+    # 'http://www.tdr-plan.com'
+]
+
+# todo: ドメインが決まったら追記する
+# CORS_ALLOWED_ORIGIN_REGEXES = [
+#     r"^https://disney-app.*\.vercel\.app$",
+# ]
 
 ROOT_URLCONF = 'config.urls'
 
